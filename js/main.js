@@ -450,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const gu_name = event.currentTarget.parentElement.parentElement.querySelector(".gu-title span").innerHTML;
                 console.log(gu_name);
 
-                location.href = `/dong_detail.html?gu=${gu_name}&dong=${dong_name}`;
+                location.href = `./dong_detail.html?gu=${gu_name}&dong=${dong_name}`;
             });
         });
     };
