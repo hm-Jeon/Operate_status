@@ -87,43 +87,6 @@ header {
     background-color: #bb1238;
 }
 
-@media screen and (max-width: 1200px) {
-    .header-center .title {
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    header {
-        flex-wrap: wrap;
-        padding: 10px;
-    }
-
-    .header-center {
-        flex-direction: column;
-        flex-grow: 1;
-        min-width: 100%;
-        order: 1;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .header-left .logo .logo-text {
-        display: none;
-    }
-
-    .header-center .title {
-        font-size: 1.2rem;
-        line-height: 1.4;
-        text-align: center;
-        white-space: normal;
-        word-break: keep-all;
-    }
-    .header-center .time {
-        font-size: 0.8rem;
-    }
-}
-
 .main {
     display: flex;
     flex-direction: column;
@@ -157,6 +120,12 @@ header {
     width: fit-content !important;
     background-color: #1b263b;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.operate-status .swiper .swiper-wrapper .gu .gu-logo {
+    height: 1.2rem;
+    filter: brightness(0) invert(1);
 }
 
 .operate-status .swiper .swiper-wrapper .gu .gu-title {
@@ -166,11 +135,6 @@ header {
     font-size: 1.2rem;
     font-weight: 700;
     padding: 10px 10px 15px;
-}
-
-.operate-status .swiper .swiper-wrapper .gu .gu-logo {
-    height: 1.2rem;
-    filter: brightness(0) invert(1);
 }
 
 .operate-status .swiper .swiper-wrapper .gu .list-header {
@@ -187,7 +151,7 @@ header {
 .operate-status .swiper .swiper-wrapper .gu .dong-list .dong {
     display: flex;
     align-items: center;
-    padding: 7px;
+    padding: 7px 5px;
 }
 .operate-status .swiper .swiper-wrapper .gu .dong-list .dong:nth-child(even) {
     background-color: #142133;
@@ -225,4 +189,74 @@ header {
 }
 .operate-status .swiper .swiper-wrapper .gu .dong-list .status.smooth {
     background-color: #0088ca;
+}
+
+@media screen and (max-width: 1200px) {
+    .header-center .title {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .header-center {
+        flex-direction: column;
+        flex-grow: 1;
+        min-width: 100%;
+        order: 1;
+    }
+
+    .main {
+        padding: 10px;
+    }
+
+    .operate-status .swiper .swiper-wrapper .gu .gu-logo {
+        height: 1rem;
+    }
+    .operate-status .swiper .swiper-wrapper .gu .gu-title {
+        font-size: 1rem;
+    }
+
+    .operate-status .swiper .swiper-wrapper .gu .dong-list {
+        font-size: 0.8rem;
+    }
+    
+    .operate-status .swiper .swiper-wrapper .gu .list-header > div:first-child,
+    .operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:first-child {
+        width: 30px;
+    }
+    .operate-status .swiper .swiper-wrapper .gu .list-header > div:nth-child(2),
+    .operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:nth-child(2) {
+        width: 120px;
+    }
+    .operate-status .swiper .swiper-wrapper .gu .list-header > div:nth-child(3),
+    .operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:nth-child(3) {
+        width: 50px;
+    }
+
+    .operate-status .swiper .swiper-wrapper .gu .dong-list .status {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header-left .logo .logo-text {
+        display: none;
+    }
+
+    .header-center .title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        text-align: center;
+        white-space: normal;
+        word-break: keep-all;
+    }
+    .header-center .time {
+        font-size: 0.8rem;
+    }
 }
