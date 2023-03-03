@@ -47,7 +47,6 @@ const SEOUL_DONG = {
 document.addEventListener("DOMContentLoaded", () => {
     const time_now = document.querySelector("#time_now");
     const time_update = document.querySelector("#time_update");
-    const main = document.querySelector(".main");
     const operate_status = document.querySelector(".operate-status .swiper .swiper-wrapper");
 
     const getDate = () => {

@@ -18,7 +18,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    column-gap: 20px;
+    row-gap: 10px;
     padding: 20px;
 }
 
@@ -86,6 +87,43 @@ header {
     background-color: #bb1238;
 }
 
+@media screen and (max-width: 1200px) {
+    .header-center .title {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .header-center {
+        flex-direction: column;
+        flex-grow: 1;
+        min-width: 100%;
+        order: 1;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header-left .logo .logo-text {
+        display: none;
+    }
+
+    .header-center .title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        text-align: center;
+        white-space: normal;
+        word-break: keep-all;
+    }
+    .header-center .time {
+        font-size: 0.8rem;
+    }
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -109,13 +147,11 @@ header {
     height: 100%;
 }
 
-.operate-status .swiper .swiper-wrapper {
-    display: flex;
-    max-width: 100%;
-    height: 100%;
+.operate-status .swiper .swiper-scrollbar .swiper-scrollbar-drag {
+    background-color: #ffffff33;
 }
 
-.operate-status .gu {
+.operate-status .swiper .swiper-wrapper .gu {
     display: flex;
     flex-direction: column;
     width: fit-content !important;
@@ -123,7 +159,7 @@ header {
     border-radius: 10px;
 }
 
-.operate-status .gu .gu-title {
+.operate-status .swiper .swiper-wrapper .gu .gu-title {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -132,61 +168,61 @@ header {
     padding: 10px 10px 15px;
 }
 
-.operate-status .gu .gu-logo {
+.operate-status .swiper .swiper-wrapper .gu .gu-logo {
     height: 1.2rem;
     filter: brightness(0) invert(1);
 }
 
-.operate-status .gu .list-header {
+.operate-status .swiper .swiper-wrapper .gu .list-header {
     display: flex;
     padding: 5px;
     font-size: 0.8rem;
     background-color: #142133;
 }
 
-.operate-status .gu .dong-list {
+.operate-status .swiper .swiper-wrapper .gu .dong-list {
     flex-grow: 1;
 }
 
-.operate-status .gu .dong-list .dong {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong {
     display: flex;
     align-items: center;
     padding: 7px;
 }
-.operate-status .gu .dong-list .dong:nth-child(even) {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong:nth-child(even) {
     background-color: #142133;
 }
 
-.operate-status .gu .list-header > div,
-.operate-status .gu .dong-list .dong > div {
+.operate-status .swiper .swiper-wrapper .gu .list-header > div,
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div {
     text-align: center;
 }
 
-.operate-status .gu .list-header > div:first-child,
-.operate-status .gu .dong-list .dong > div:first-child {
+.operate-status .swiper .swiper-wrapper .gu .list-header > div:first-child,
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:first-child {
     width: 50px;
 }
-.operate-status .gu .list-header > div:nth-child(2),
-.operate-status .gu .dong-list .dong > div:nth-child(2) {
+.operate-status .swiper .swiper-wrapper .gu .list-header > div:nth-child(2),
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:nth-child(2) {
     width: 150px;
 }
-.operate-status .gu .list-header > div:nth-child(3),
-.operate-status .gu .dong-list .dong > div:nth-child(3) {
+.operate-status .swiper .swiper-wrapper .gu .list-header > div:nth-child(3),
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong > div:nth-child(3) {
     width: 70px;
 }
 
-.operate-status .gu .dong-list .status {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .status {
     display: inline-block;
     width: 0.8rem;
     height: 0.8rem;
     border-radius: 50%;
 }
-.operate-status .gu .dong-list .status.busy {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .status.busy {
     background-color: #bb1238;
 }
-.operate-status .gu .dong-list .status.normal {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .status.normal {
     background-color: #2e9545;
 }
-.operate-status .gu .dong-list .status.smooth {
+.operate-status .swiper .swiper-wrapper .gu .dong-list .status.smooth {
     background-color: #0088ca;
 }
