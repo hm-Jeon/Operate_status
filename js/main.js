@@ -1,3 +1,5 @@
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+
 const SEOUL_GU = [
     "종로구", "중구", "용산구", 
     "성동구", "광진구", "동대문구", 
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const time_now = document.querySelector("#time_now");
     const time_update = document.querySelector("#time_update");
     const main = document.querySelector(".main");
-    const operate_status = document.querySelector(".operate-status");
+    const operate_status = document.querySelector(".operate-status .swiper .swiper-wrapper");
 
     const getDate = () => {
         const date = new Date();
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTimeUpdate();
 
         SEOUL_GU.forEach(gu => {
-            operate_status.innerHTML += "<div class='gu'>" +
+            operate_status.innerHTML += "<div class='gu swiper-slide'>" +
                 `<div class='gu-title'><img class='gu-logo' src='./images/${SEOUL_GU_LOGO[gu]}.svg' alt='${gu}'> ${gu}</div>` +
                 "<div class='list-header'>" +
                     "<div class='status'>상태</div>" +
@@ -125,6 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
             "</div>";
         });
     }
+
+    const swiper = new Swiper(".swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        scrollbar: {
+            el: ".swiper-scrollbar",
+            hide: true,
+        },
+    });
 
     const updateStatus = () => {
         if((+getTime().substring(6) % 10) === 0) {

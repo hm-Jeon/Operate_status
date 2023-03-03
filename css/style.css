@@ -107,20 +107,18 @@ header {
     flex-grow: 1;
     max-width: 100%;
     height: 100%;
-    overflow-x: auto;
 }
-.operate-status::-webkit-scrollbar {
-    background-color: transparent;
-    height: 5px;
-}
-.operate-status::-webkit-scrollbar-thumb {
-    background-color: #ffffff33;
-    border-radius: 5px;
+
+.operate-status .swiper .swiper-wrapper {
+    display: flex;
+    max-width: 100%;
+    height: 100%;
 }
 
 .operate-status .gu {
     display: flex;
     flex-direction: column;
+    width: fit-content !important;
     background-color: #1b263b;
     border-radius: 10px;
 }

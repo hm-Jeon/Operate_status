@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="./css/reset.css" />
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
         <title>서울시 행정복지센터 운영 현황</title>
     </head>
@@ -37,9 +38,14 @@
             <div class="time">
                 <span id="time_update"></span> 기준
             </div>
-            <section class="operate-status"></section>
+            <section class="operate-status">
+                <div class="swiper">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </section>
         </div>
 
-        <script src="./js/main.js"></script>
+        <script src="./js/main.js" type="module"></script>
     </body>
 </html>
