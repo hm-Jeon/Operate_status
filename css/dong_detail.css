@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap");
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #0d1b2a;
+    color: #fff;
+    font-family: "Noto Sans KR", sans-serif;
+    min-height: 100vh;
+    user-select: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 10px;
+    padding: 20px;
+}
+
+.header-left {
+    display: flex;
+}
+.header-left .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px;
+}
+.header-left .logo .logo-img {
+    height: 100%;
+}
+.header-left .logo .logo-text {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.header-center {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.header-center .title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.header-right .gu-logo {
+    height: 30px;
+}
+.header-right .gu-text {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    padding: 0 20px 20px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    width: 100%;
+    max-width: 1400px;
+    background-color: #1b263b;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.tab-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.tab {
+    color: #fff;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid #0d1b2a;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.tab.active {
+    opacity: 1;
+    background-color: #0d1b2a;
+}
+
+.content {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+.content.active {
+    display: flex;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.number-ticket-tab-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.number-ticket-tab {
+    color: #fff;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid #0d1b2a;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.number-ticket-tab.active {
+    opacity: 1;
+    background-color: #0d1b2a;
+}
+
+.mode {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+}
+.mode.active {
+    display: flex;
+}
+
+.chart-wrap {
+    width: 100%;
+    overflow: auto;
+}
+.chart-wrap::-webkit-scrollbar {
+    display: none;
+}
+
+.chart {
+    min-width: 800px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+    .header-center .title {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .header-center {
+        flex-grow: 1;
+        min-width: 100%;
+        order: 1;
+    }
+
+    .main {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header-left .logo .logo-text {
+        display: none;
+    }
+
+    .header-center .title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        text-align: center;
+        white-space: normal;
+        word-break: keep-all;
+    }
+    .header-center .time {
+        font-size: 0.8rem;
+    }
+
+    .header-right .gu-text {
+        display: none;
+    }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- Spoqa Han Sans Font -->
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/dong_detail.css" />
+    
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a class="logo" href="./index.html">
+                <img class="logo-img" src="./images/seoul_logo.svg" alt="서울특별시" />
+                <span class="logo-text">서울특별시</span>
+            </a>
+        </div>
+        <div class="header-center">
+            <h1 class="title"><span class="dong-name"></span> 행정복지센터 운영현황</h1>
+        </div>
+        <div class="header-right"></div>
+    </header>
+
+    
+    <div class="main">
+        <section class="app">
+            <div class="tab-box">
+                <button type="button" class="tab" data-value="number_ticket">번호표 발급현황</button>
+                <button type="button" class="tab" data-value="call_log">민원인 호출기록</button>
+            </div>
+
+            <!-- 번호표 발급현황 -->
+            <div class="content" id="number_ticket">
+
+                <div class="search">
+                    <div class="number-ticket-tab-box">
+                        <button type="button" class="number-ticket-tab" data-value="year">연도별</button>
+                        <button type="button" class="number-ticket-tab" data-value="month">월별</button>
+                    </div>
+                    
+                </div>
+
+                <div class="mode" id="year">
+                    <div class="chart-wrap dragscroll">
+                        <div class="chart">
+                            <canvas id="number_ticket_chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="mode" id="month">
+                    <div class="chart-wrap dragscroll">
+                        <div class="chart">
+                            <canvas id="number_ticket_chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 민원인 호출기록 -->
+            <div class="content" id="call_log">
+                <div class="chart-wrap dragscroll">
+                    <div class="chart">
+                        <canvas id="call_log_chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    
+    <!-- Chart JS 3.9.1 / Chart JS DataLabels Plugin 2.0.0 -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+    <script src="/js/dong_detail.js" type="module"></script>
+</body>
+</html>

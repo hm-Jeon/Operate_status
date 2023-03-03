@@ -79,13 +79,19 @@ header {
     border-radius: 50%;
 }
 .header-right .status-list .status.smooth:before {
+    /* background-color: #0088ca; */
     background-color: #0088ca;
+    box-shadow: 0 0 5px #0088ca, 0 0 10px #0088ca;
 }
 .header-right .status-list .status.normal:before {
+    /* background-color: #2e9545; */
     background-color: #2e9545;
+    box-shadow: 0 0 5px #2e9545, 0 0 10px #2e9545;
 }
 .header-right .status-list .status.busy:before {
+    /* background-color: #bb1238; */
     background-color: #bb1238;
+    box-shadow: 0 0 5px #bb1238, 0 0 10px #bb1238;
 }
 
 .main {
@@ -137,6 +143,9 @@ header {
     font-weight: 700;
     padding: 10px 10px 15px;
 }
+.operate-status .swiper .swiper-wrapper .gu .gu-title:hover {
+    opacity: 0.5;
+}
 
 .operate-status .swiper .swiper-wrapper .gu .list-header {
     display: flex;
@@ -154,8 +163,14 @@ header {
     align-items: center;
     padding: 7px 5px;
 }
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong.error {
+    opacity: 0.5;
+}
 .operate-status .swiper .swiper-wrapper .gu .dong-list .dong:nth-child(even) {
     background-color: #142133;
+}
+.operate-status .swiper .swiper-wrapper .gu .dong-list .dong:hover .dong-name {
+    opacity: 0.5;
 }
 
 .operate-status .swiper .swiper-wrapper .gu .list-header > div,
@@ -182,14 +197,24 @@ header {
     height: 0.8rem;
     border-radius: 50%;
 }
+.operate-status .swiper .swiper-wrapper .gu .dong-list .status.error {
+    width: fit-content;
+    font-size: 0.8rem;
+}
 .operate-status .swiper .swiper-wrapper .gu .dong-list .status.busy {
+    /* background-color: #bb1238; */
     background-color: #bb1238;
+    box-shadow: 0 0 5px #bb1238, 0 0 10px #bb1238;
 }
 .operate-status .swiper .swiper-wrapper .gu .dong-list .status.normal {
+    /* background-color: #2e9545; */
     background-color: #2e9545;
+    box-shadow: 0 0 5px #2e9545, 0 0 10px #2e9545;
 }
 .operate-status .swiper .swiper-wrapper .gu .dong-list .status.smooth {
+    /* background-color: #0088ca; */
     background-color: #0088ca;
+    box-shadow: 0 0 5px #0088ca, 0 0 10px #0088ca;
 }
 
 @media screen and (max-width: 1200px) {
@@ -242,6 +267,9 @@ header {
     .operate-status .swiper .swiper-wrapper .gu .dong-list .status {
         width: 0.6rem;
         height: 0.6rem;
+    }
+    .operate-status .swiper .swiper-wrapper .gu .dong-list .status.error {
+        font-size: 0.6rem;
     }
 }
 
