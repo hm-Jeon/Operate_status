@@ -59,11 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const getTime = () => {
         const time = new Date();
-        const hour = time.getHours();
-        const minute = time.getMinutes();
-        const second = time.getSeconds();
+        const hour = time.getHours().toString().padStart(2, "0");
+        const minute = time.getMinutes().toString().padStart(2, "0");
+        const second = time.getSeconds().toString().padStart(2, "0");
 
-        return `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
+        return `${hour}:${minute}:${second}`;
     }
 
     const date = getDate();
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startTimeNow();
     
     const renderOperateStatus = () => {
-        time_update.innerHTML = getTime();
+        renderTimeUpdate();
 
         SEOUL_GU.forEach(gu => {
             operate_status.innerHTML += "<div class='gu'>" +
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateStatus = () => {
         if((+getTime().substring(6) % 10) === 0) {
-            time_update.innerHTML = getTime();
+            renderTimeUpdate();
 
             const allDong = document.querySelectorAll(".dong-list .dong");
     
