@@ -308,11 +308,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 htmlString += `<tr>`;
 
                 if (idx === 0) {
-                    htmlString += "<td>제증명 발급</td>"
+                    htmlString += "<td>제증명 발급</td>";
                 } else if (idx === 1) {
-                    htmlString += "<td>신분증 발급</td>"
+                    htmlString += "<td>신분증 발급</td>";
                 } else if (idx === 2) {
-                    htmlString += "<td>출생/사망/전입 신고</td>"
+                    htmlString += "<td>출생/사망/전입 신고</td>";
                 }
 
                 let amount = 0;
@@ -322,9 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     amount += row;
                 });
 
-
-                htmlString += `<td>${amount}</td>` +
-                `</tr>`;
+                htmlString += `<td>${amount}</td>` + `</tr>`;
             });
 
             return htmlString;
@@ -332,12 +330,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         year_table_foot.innerHTML = (() => {
             let htmlString = "<td>합계</td>";
-            
-            for(var i = 2; i <= 14; i++) {
+
+            for (var i = 2; i <= 14; i++) {
                 let amount = 0;
-                document.querySelectorAll(".mode#year table tbody tr").forEach(tr => {
-                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
-                })
+                document.querySelectorAll(".mode#year table tbody tr").forEach((tr) => {
+                    amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
+                });
 
                 htmlString += `<td>${amount}</td>`;
             }
@@ -491,11 +489,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 htmlString += `<tr>`;
 
                 if (idx === 0) {
-                    htmlString += "<td>제증명 발급</td>"
+                    htmlString += "<td>제증명 발급</td>";
                 } else if (idx === 1) {
-                    htmlString += "<td>신분증 발급</td>"
+                    htmlString += "<td>신분증 발급</td>";
                 } else if (idx === 2) {
-                    htmlString += "<td>출생/사망/전입 신고</td>"
+                    htmlString += "<td>출생/사망/전입 신고</td>";
                 }
 
                 let amount = 0;
@@ -505,9 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     amount += row;
                 });
 
-
-                htmlString += `<td>${amount}</td>` +
-                `</tr>`;
+                htmlString += `<td>${amount}</td>` + `</tr>`;
             });
 
             return htmlString;
@@ -515,12 +511,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         month_table_foot.innerHTML = (() => {
             let htmlString = "<td>합계</td>";
-            
-            for(var i = 2; i <= 33; i++) {
+
+            for (var i = 2; i <= 33; i++) {
                 let amount = 0;
-                document.querySelectorAll(".mode#month table tbody tr").forEach(tr => {
-                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
-                })
+                document.querySelectorAll(".mode#month table tbody tr").forEach((tr) => {
+                    amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
+                });
 
                 htmlString += `<td>${amount}</td>`;
             }
@@ -674,11 +670,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 htmlString += `<tr>`;
 
                 if (idx === 0) {
-                    htmlString += "<td>제증명 발급</td>"
+                    htmlString += "<td>제증명 발급</td>";
                 } else if (idx === 1) {
-                    htmlString += "<td>신분증 발급</td>"
+                    htmlString += "<td>신분증 발급</td>";
                 } else if (idx === 2) {
-                    htmlString += "<td>출생/사망/전입 신고</td>"
+                    htmlString += "<td>출생/사망/전입 신고</td>";
                 }
 
                 let amount = 0;
@@ -688,9 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     amount += row;
                 });
 
-
-                htmlString += `<td>${amount}</td>` +
-                `</tr>`;
+                htmlString += `<td>${amount}</td>` + `</tr>`;
             });
 
             return htmlString;
@@ -698,12 +692,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         day_table_foot.innerHTML = (() => {
             let htmlString = "<td>합계</td>";
-            
-            for(var i = 2; i <= 16; i++) {
+
+            for (var i = 2; i <= 16; i++) {
                 let amount = 0;
-                document.querySelectorAll(".mode#day table tbody tr").forEach(tr => {
-                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
-                })
+                document.querySelectorAll(".mode#day table tbody tr").forEach((tr) => {
+                    amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
+                });
 
                 htmlString += `<td>${amount}</td>`;
             }
@@ -712,7 +706,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })();
     };
 
-    
     const initNumberTicket = () => {
         renderNumberTicketYearChart();
         renderNumberTicketYearTable();
@@ -723,4 +716,312 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     initNumberTicket();
+
+    const call_log_tabs = document.querySelectorAll(".call-log-tab");
+
+    const initCallLogTab = () => {
+        call_log_tabs[0].classList.add("active");
+    };
+
+    initCallLogTab();
+
+    const call_log_mode = document.querySelectorAll("#call_log .mode");
+
+    const renderCallLogContent = () => {
+        const call_log_tab_active = document.querySelector(".call-log-tab.active");
+
+        call_log_mode.forEach((mode) => {
+            if (mode.id === call_log_tab_active.dataset.value) {
+                mode.classList.add("active");
+            } else {
+                mode.classList.remove("active");
+            }
+        });
+    };
+
+    renderCallLogContent();
+
+    const addCallLogTabClickEventListener = () => {
+        call_log_tabs.forEach((tab) => {
+            tab.addEventListener("click", (event) => {
+                call_log_tabs.forEach((tab) => {
+                    if (tab === event.currentTarget) {
+                        tab.classList.add("active");
+                    } else {
+                        tab.classList.remove("active");
+                    }
+                });
+
+                renderCallLogContent();
+            });
+        });
+    };
+
+    addCallLogTabClickEventListener();
+
+    const amount_label = [];
+    const amount_data_1 = [];
+    const amount_data_2 = [];
+    const amount_data_3 = [];
+    const amount_data = [amount_data_1, amount_data_2, amount_data_3];
+
+    for (var i = 1; i <= 8; i++) {
+        amount_label.push(`${i}번 창구`);
+        amount_data_1.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+        amount_data_2.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+        amount_data_3.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+    }
+
+    const renderCallLogAmountChart = () => {
+        const ctx = document.querySelector("#amount #call_log_chart");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: amount_label,
+                datasets: [
+                    {
+                        label: "제증명 발급",
+                        data: amount_data_1,
+                        borderColor: "#0088ca",
+                        backgroundColor: "#0088ca",
+                        borderRadius: 10,
+                    },
+                    {
+                        label: "신분증 발급",
+                        data: amount_data_2,
+                        borderColor: "#2e9545",
+                        backgroundColor: "#2e9545",
+                        borderRadius: 10,
+                    },
+                    {
+                        label: "출생/사망/전입 신고",
+                        data: amount_data_3,
+                        borderColor: "#bb1238",
+                        backgroundColor: "#bb1238",
+                        borderRadius: 10,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                size: 12,
+                            },
+                        },
+                    },
+                    y: {
+                        stacked: true,
+                        max: 20,
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [6, 10000],
+                            tickLength: 6,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}건`,
+                            font: {
+                                color: "#fff",
+                            },
+                            padding: 5,
+                        },
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label;
+                                let value = context.parsed.y;
+                                return `${label}: ${(+value).toLocaleString("kr")}건`;
+                            },
+                        },
+                    },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#fff",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0) + average(ctx, 1) + average(ctx, 2),
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    };
+
+    const amount_data_amount = [];
+
+    const renderCallLogAmountTable = () => {
+        const amount_table_head = document.querySelector(".mode#amount table thead");
+        const amount_table_body = document.querySelector(".mode#amount table tbody");
+        const amount_table_foot = document.querySelector(".mode#amount table tfoot");
+
+        amount_table_head.innerHTML =
+            `<tr>` +
+            (() => {
+                let htmlString = "<td>업무구분</td>";
+
+                amount_label.forEach((label) => {
+                    htmlString += `<td>${label}</td>`;
+                });
+
+                return htmlString;
+            })() +
+            `<td>합계</td>` +
+            `<tr>`;
+
+        amount_table_body.innerHTML = (() => {
+            let htmlString = "";
+
+            amount_data.forEach((rows, idx) => {
+                htmlString += `<tr>`;
+
+                if (idx === 0) {
+                    htmlString += "<td>제증명 발급</td>";
+                } else if (idx === 1) {
+                    htmlString += "<td>신분증 발급</td>";
+                } else if (idx === 2) {
+                    htmlString += "<td>출생/사망/전입 신고</td>";
+                }
+
+                let amount = 0;
+
+                rows.forEach((row) => {
+                    htmlString += `<td>${row}</td>`;
+                    amount += row;
+                });
+
+                htmlString += `<td>${amount}</td>` + `</tr>`;
+            });
+
+            return htmlString;
+        })();
+
+        amount_table_foot.innerHTML = (() => {
+            let htmlString = "<td>합계</td>";
+
+            for (var i = 2; i <= 10; i++) {
+                let amount = 0;
+                document.querySelectorAll(".mode#amount table tbody tr").forEach((tr) => {
+                    amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
+                });
+
+                if (i < 10) amount_data_amount.push(amount);
+                htmlString += `<td>${amount}</td>`;
+            }
+
+            return htmlString;
+        })();
+    };
+
+    const time_label = [];
+    const time_data = [];
+
+    for (var i = 1; i <= 8; i++) {
+        time_label.push(`${i}번 창구`);
+        time_data.push(Math.floor(Math.random() * (30 - 5 + 1)) + 5);
+    }
+
+    const renderCallLogTimeChart = () => {
+        const ctx = document.querySelector("#time #call_log_chart");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: time_label,
+                datasets: [
+                    {
+                        label: "평균 소요시간",
+                        data: time_data,
+                        borderColor: "#0088ca",
+                        backgroundColor: "#0088ca",
+                        borderRadius: 10,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                size: 12,
+                            },
+                        },
+                    },
+                    y: {
+                        stacked: true,
+                        max: 60,
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [6, 10000],
+                            tickLength: 6,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}분`,
+                            font: {
+                                color: "#fff",
+                            },
+                            padding: 5,
+                        },
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label;
+                                let value = context.parsed.y;
+                                return `${label}: ${(+value).toLocaleString("kr")}분`;
+                            },
+                        },
+                    },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#fff",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0),
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    };
+
+    const initCallLog = () => {
+        renderCallLogAmountChart();
+        renderCallLogAmountTable();
+        renderCallLogTimeChart();
+    };
+
+    initCallLog();
 });

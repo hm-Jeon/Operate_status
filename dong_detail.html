@@ -43,7 +43,6 @@
                         <button type="button" class="number-ticket-tab" data-value="month">월별</button>
                         <button type="button" class="number-ticket-tab" data-value="day">일별</button>
                     </div>
-                    
                 </div>
 
                 <div class="mode" id="year">
@@ -97,9 +96,42 @@
             
             <!-- 민원인 호출기록 -->
             <div class="content" id="call_log">
-                <div class="chart-wrap dragscroll">
-                    <div class="chart">
-                        <canvas id="call_log_chart"></canvas>
+                <div class="search">
+                    <div class="call-log-tab-box">
+                        <button type="button" class="call-log-tab" data-value="amount">호출건수</button>
+                        <button type="button" class="call-log-tab" data-value="time">소요시간</button>
+                    </div>
+                </div>
+
+                <div class="mode" id="amount">
+                    <div class="chart-wrap dragscroll">
+                        <div class="chart">
+                            <canvas id="call_log_chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap dragscroll">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mode" id="time">
+                    <div class="chart-wrap dragscroll">
+                        <div class="chart">
+                            <canvas id="call_log_chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap dragscroll">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
                     </div>
                 </div>
             </div>

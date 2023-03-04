@@ -127,15 +127,18 @@ header {
 
 .search {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.number-ticket-tab-box {
+.number-ticket-tab-box,
+.call-log-tab-box {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.number-ticket-tab {
+.number-ticket-tab,
+.call-log-tab {
     color: #fff;
     background-color: transparent;
     padding: 5px 10px;
@@ -146,7 +149,8 @@ header {
     opacity: 0.7;
     transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
-.number-ticket-tab.active {
+.number-ticket-tab.active,
+.call-log-tab.active {
     opacity: 1;
     background-color: #0d1b2a;
 }
@@ -203,6 +207,10 @@ header {
     min-width: 1400px;
 }
 .mode#day table {
+    max-width: 1200px;
+    min-width: 800px;
+}
+.mode#amount table {
     max-width: 1200px;
     min-width: 800px;
 }
