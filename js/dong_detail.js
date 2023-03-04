@@ -1,3 +1,5 @@
+import Swiper from "https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js";
+
 const SEOUL_GU_LOGO = {
     종로구: "jongno_logo",
     중구: "jung_logo",
@@ -767,9 +769,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (var i = 1; i <= 8; i++) {
         amount_label.push(`${i}번 창구`);
-        amount_data_1.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
-        amount_data_2.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
-        amount_data_3.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+        if (i === 2 || i === 5) {
+            amount_data_1.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
+            amount_data_2.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
+            amount_data_3.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
+        } else if (i === 4 || i === 8) {
+            amount_data_1.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
+            amount_data_2.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
+            amount_data_3.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
+        } else {
+            amount_data_1.push(Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+            amount_data_2.push(Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+            amount_data_3.push(Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+        }
     }
 
     const renderCallLogAmountChart = () => {
@@ -786,6 +798,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         borderColor: "#0088ca",
                         backgroundColor: "#0088ca",
                         borderRadius: 10,
+                        barPercentage: 0.5,
                     },
                     {
                         label: "신분증 발급",
@@ -793,6 +806,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         borderColor: "#2e9545",
                         backgroundColor: "#2e9545",
                         borderRadius: 10,
+                        barPercentage: 0.5,
                     },
                     {
                         label: "출생/사망/전입 신고",
@@ -800,6 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         borderColor: "#bb1238",
                         backgroundColor: "#bb1238",
                         borderRadius: 10,
+                        barPercentage: 0.5,
                     },
                 ],
             },
@@ -820,11 +835,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     y: {
                         stacked: true,
-                        max: 20,
                         beginAtZero: true,
                         grid: {
                             borderDash: [6, 10000],
-                            tickLength: 6,
+                            tickLength: 5,
                             color: "#fff",
                         },
                         ticks: {
@@ -864,8 +878,6 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         });
     };
-
-    const amount_data_amount = [];
 
     const renderCallLogAmountTable = () => {
         const amount_table_head = document.querySelector(".mode#amount table thead");
@@ -922,7 +934,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
                 });
 
-                if (i < 10) amount_data_amount.push(amount);
                 htmlString += `<td>${amount}</td>`;
             }
 
@@ -931,12 +942,58 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const time_label = [];
-    const time_data = [];
+    const time_log_data = [];
+    const time_average = [];
 
     for (var i = 1; i <= 8; i++) {
         time_label.push(`${i}번 창구`);
-        time_data.push(Math.floor(Math.random() * (30 - 5 + 1)) + 5);
     }
+
+    const setTimeLogData = () => {
+        const call_amount = document.querySelectorAll("#amount table tfoot td");
+
+        for (var i = 1; i < call_amount.length - 1; i++) {
+            const time_log = [];
+            const open_time = new Date();
+            open_time.setHours(9);
+            open_time.setMinutes(0);
+            open_time.setSeconds(0);
+
+            for (var j = 0; j < +call_amount[i].innerHTML; j++) {
+                const term = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+
+                let duration = 0;
+                if (i === 2 || i === 5) {
+                    duration = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+                } else if (i === 4 || i === 8) {
+                    duration = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+                } else {
+                    duration = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
+                }
+
+                const call_time = new Date(open_time.setMinutes(open_time.getMinutes() + term));
+                const finish_time = new Date(
+                    open_time.setMinutes(open_time.getMinutes() + duration)
+                );
+
+                time_log.push({ call: call_time, finish: finish_time, duration: duration });
+            }
+
+            time_log_data.push(time_log);
+        }
+    };
+
+    const getTimeAverage = () => {
+        time_log_data.forEach((time_log) => {
+            let amount = 0;
+
+            time_log.forEach((log) => {
+                amount += log.duration;
+            });
+
+            time_average.push(Math.round(amount / time_log.length));
+        });
+    };
 
     const renderCallLogTimeChart = () => {
         const ctx = document.querySelector("#time #call_log_chart");
@@ -948,10 +1005,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 datasets: [
                     {
                         label: "평균 소요시간",
-                        data: time_data,
+                        data: time_average,
                         borderColor: "#0088ca",
                         backgroundColor: "#0088ca",
                         borderRadius: 10,
+                        barPercentage: 0.5,
                     },
                 ],
             },
@@ -1017,10 +1075,53 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    const renderCallLogTimeTable = () => {
+        const call_log_swiper = document.querySelector("#time .swiper-wrapper");
+
+        let htmlString = "";
+
+        time_log_data.forEach((time_log, idx) => {
+            htmlString += `<div class="window swiper-slide">
+            <div class='time-log-title'><span>${idx + 1}번 창구</span></div>
+            <div class="time-log-header">
+                <div class="call">호출시간</div>
+                <div class="finish">완료시간</div>
+                <div class="duration">소요시간</div>
+            </div>
+            <ul class="time-log">
+            `;
+
+            time_log.forEach((log) => {
+                htmlString += `<li class="log">
+                    <div class="call">${log.call.toLocaleTimeString("ko-KR")}</div>
+                    <div class="finish">${log.finish.toLocaleTimeString("ko-KR")}</div>
+                    <div class="duration">${log.duration}분</div>
+                </li>`;
+            });
+
+            htmlString += `</ul>
+            </div>`;
+        });
+
+        call_log_swiper.innerHTML = htmlString;
+    };
+
+    const swiper = new Swiper(".swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        scrollbar: {
+            el: ".swiper-scrollbar",
+            hide: true,
+        },
+    });
+
     const initCallLog = () => {
         renderCallLogAmountChart();
         renderCallLogAmountTable();
+        setTimeLogData();
+        getTimeAverage();
         renderCallLogTimeChart();
+        renderCallLogTimeTable();
     };
 
     initCallLog();

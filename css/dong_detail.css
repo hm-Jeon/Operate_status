@@ -252,6 +252,79 @@ header {
     border-top: 2px solid #202d43 !important;
 }
 
+#time .time-log-wrap {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    max-width: 100%;
+    height: 100%;
+}
+
+#time .time-log-wrap .swiper {
+    flex-grow: 1;
+    width: 100%;
+}
+
+#time .time-log-wrap .swiper .swiper-scrollbar .swiper-scrollbar-drag {
+    background-color: #ffffff33;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    background-color: #415a7777;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 10px 10px;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header {
+    display: flex;
+    padding: 5px;
+    font-size: 0.8rem;
+    background-color: #142133;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log {
+    font-size: 0.8rem;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log {
+    display: flex;
+    align-items: center;
+    padding: 7px 5px;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log:nth-child(even) {
+    background-color: #415a7788;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div,
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div {
+    text-align: center;
+}
+
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:first-child,
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:first-child {
+    width: 120px;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:nth-child(2),
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:nth-child(2) {
+    width: 120px;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:nth-child(3),
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:nth-child(3) {
+    width: 80px;
+}
+
 @media screen and (max-width: 1200px) {
     .header-center .title {
         font-size: 1.5rem;
