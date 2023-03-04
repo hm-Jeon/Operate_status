@@ -83,10 +83,10 @@ header {
     flex-grow: 1;
     gap: 10px;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1600px;
     background-color: #1b263b;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     margin: 0 auto;
     overflow: auto;
 }
@@ -153,6 +153,7 @@ header {
 
 .mode {
     display: none;
+    justify-content: center;
     flex-direction: column;
     flex-grow: 1;
     gap: 10px;
@@ -175,6 +176,74 @@ header {
     margin: 0 auto;
 }
 
+.mode .table-wrap {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    overflow-x: auto;
+}
+.mode .table-wrap::-webkit-scrollbar {
+    display: none;
+}
+.mode table {
+    width: 100%;
+    font-size: 0.8rem;
+    background-color: #415a7777;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    table-layout: fixed;
+}
+.mode#year table {
+    max-width: 1200px;
+    min-width: 800px;
+}
+.mode#month table {
+    min-width: 1400px;
+}
+.mode#day table {
+    max-width: 1200px;
+    min-width: 800px;
+}
+.mode table thead {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.mode table thead tr td,
+.mode table tbody tr td,
+.mode table tfoot tr td {
+    padding: 8px;
+}
+.mode table tbody tr td:first-child,
+.mode table tfoot tr td:first-child {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.mode table thead tr td:first-child,
+.mode table tbody tr td:first-child,
+.mode table tfoot tr td:first-child {
+    width: 150px;
+}
+.mode table thead tr td:not(:first-child),
+.mode table tbody tr td:not(:first-child),
+.mode table tfoot tr td:not(:first-child) {
+    text-align: center;
+}
+.mode table thead tr td:nth-child(2n+2),
+.mode table tbody tr td:nth-child(2n+2),
+.mode table tfoot tr td:nth-child(2n+2) {
+    background-color: #415a7788;
+}
+.mode table thead tr td:last-child,
+.mode table tbody tr td:last-child,
+.mode table tfoot tr td:last-child {
+    border-left: 2px solid #202d43 !important;
+}
+.mode table tfoot tr {
+    border-top: 2px solid #202d43 !important;
+}
+
 @media screen and (max-width: 1200px) {
     .header-center .title {
         font-size: 1.5rem;
@@ -194,6 +263,10 @@ header {
     }
 
     .main {
+        padding: 10px;
+    }
+
+    .app {
         padding: 10px;
     }
 }

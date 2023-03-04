@@ -24,14 +24,7 @@ const tab = urlParams.get("tab");
 
 // Chart Global Configuration
 Chart.defaults.responsive = true;
-// Chart.defaults.maintainAspectRatio = false;
 Chart.defaults.aspectRatio = 2;
-// Chart.defaults.layout.padding = {
-//     top: 20,
-//     bottom: 20,
-//     left: 20,
-//     right: 20,
-// };
 
 Chart.defaults.font.family = "Spoqa Han Sans Neo";
 Chart.defaults.font.color = "#fff";
@@ -115,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const initNumberTicketTab = () => {
         number_ticket_tabs[0].classList.add("active");
-    }
+    };
 
     initNumberTicketTab();
 
@@ -153,16 +146,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addNumberTicketTabClickEventListener();
 
-    const renderNumberTicketYearChart = () => {
-        const year_data_1 = [];
-        const year_data_2 = [];
-        const year_data_3 = [];
-        for (var i = 0; i < 12; i++) {
-            year_data_1.push(Math.floor(Math.random() * (1000 - 300 + 1)) + 300);
-            year_data_2.push(Math.floor(Math.random() * (1000 - 300 + 1)) + 300);
-            year_data_3.push(Math.floor(Math.random() * (1000 - 300 + 1)) + 300);
-        }
+    const average = (ctx, idx) => {
+        const values = ctx.chart.data.datasets[idx].data;
+        return values.reduce((a, b) => a + b, 0) / values.length;
+    };
 
+    const year_data_1 = [];
+    const year_data_2 = [];
+    const year_data_3 = [];
+    const year_data = [year_data_1, year_data_2, year_data_3];
+
+    for (var i = 0; i < 12; i++) {
+        year_data_1.push(Math.floor(Math.random() * (900 - 700 + 1)) + 700);
+        year_data_2.push(Math.floor(Math.random() * (900 - 700 + 1)) + 700);
+        year_data_3.push(Math.floor(Math.random() * (900 - 700 + 1)) + 700);
+    }
+
+    const renderNumberTicketYearChart = () => {
         const ctx = document.querySelector("#year #number_ticket_chart");
 
         new Chart(ctx, {
@@ -184,19 +184,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 ],
                 datasets: [
                     {
-                        label: "민원구분1",
+                        label: "제증명 발급",
                         data: year_data_1,
                         borderColor: "#0088ca",
                         backgroundColor: "#0088ca",
                     },
                     {
-                        label: "민원구분2",
+                        label: "신분증 발급",
                         data: year_data_2,
                         borderColor: "#2e9545",
                         backgroundColor: "#2e9545",
                     },
                     {
-                        label: "민원구분3",
+                        label: "출생/사망/전입 신고",
                         data: year_data_3,
                         borderColor: "#bb1238",
                         backgroundColor: "#bb1238",
@@ -218,7 +218,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                     },
                     y: {
-                        beginAtZero: true,
+                        max: 1000,
+                        min: 500,
+                        // beginAtZero: true,
                         grid: {
                             borderDash: [6, 10000],
                             tickLength: 6,
@@ -226,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         ticks: {
                             maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}건`,
                             font: {
                                 color: "#fff",
                             },
@@ -243,23 +246,120 @@ document.addEventListener("DOMContentLoaded", () => {
                             },
                         },
                     },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#0088ca",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0),
+                            },
+                            1: {
+                                type: "line",
+                                borderColor: "#2e9545",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 1),
+                            },
+                            2: {
+                                type: "line",
+                                borderColor: "#bb1238",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 2),
+                            },
+                        },
+                    },
                 },
             },
         });
+    };
+
+    const renderNumberTicketYearTable = () => {
+        const year_table_head = document.querySelector(".mode#year table thead");
+        const year_table_body = document.querySelector(".mode#year table tbody");
+        const year_table_foot = document.querySelector(".mode#year table tfoot");
+
+        year_table_head.innerHTML =
+            `<tr>` +
+            (() => {
+                let htmlString = "<td>업무구분</td>";
+
+                for (var i = 1; i <= 12; i++) {
+                    htmlString += `<td>${i}월</td>`;
+                }
+
+                return htmlString;
+            })() +
+            `<td>합계</td>` +
+            `<tr>`;
+
+        year_table_body.innerHTML = (() => {
+            let htmlString = "";
+
+            year_data.forEach((rows, idx) => {
+                htmlString += `<tr>`;
+
+                if (idx === 0) {
+                    htmlString += "<td>제증명 발급</td>"
+                } else if (idx === 1) {
+                    htmlString += "<td>신분증 발급</td>"
+                } else if (idx === 2) {
+                    htmlString += "<td>출생/사망/전입 신고</td>"
+                }
+
+                let amount = 0;
+
+                rows.forEach((row) => {
+                    htmlString += `<td>${row}</td>`;
+                    amount += row;
+                });
+
+
+                htmlString += `<td>${amount}</td>` +
+                `</tr>`;
+            });
+
+            return htmlString;
+        })();
+
+        year_table_foot.innerHTML = (() => {
+            let htmlString = "<td>합계</td>";
+            
+            for(var i = 2; i <= 14; i++) {
+                let amount = 0;
+                document.querySelectorAll(".mode#year table tbody tr").forEach(tr => {
+                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
+                })
+
+                htmlString += `<td>${amount}</td>`;
+            }
+
+            return htmlString;
+        })();
+    };
+
+    const month_label = [];
+    const month_data_1 = [];
+    const month_data_2 = [];
+    const month_data_3 = [];
+    const month_data = [month_data_1, month_data_2, month_data_3];
+
+    for (var i = 1; i <= 31; i++) {
+        month_label.push(`${i}일`);
+        month_data_1.push(Math.floor(Math.random() * (50 - 10 + 1)) + 10);
+        month_data_2.push(Math.floor(Math.random() * (50 - 10 + 1)) + 10);
+        month_data_3.push(Math.floor(Math.random() * (50 - 10 + 1)) + 10);
     }
 
     const renderNumberTicketMonthChart = () => {
-        const month_label = [];
-        const month_data_1 = [];
-        const month_data_2 = [];
-        const month_data_3 = [];
-        for (var i = 1; i <= 31; i++) {
-            month_label.push(`${i}일`);
-            month_data_1.push(Math.floor(Math.random() * (50 - 5 + 1)) + 5);
-            month_data_2.push(Math.floor(Math.random() * (50 - 5 + 1)) + 5);
-            month_data_3.push(Math.floor(Math.random() * (50 - 5 + 1)) + 5);
-        }
-
         const ctx = document.querySelector("#month #number_ticket_chart");
 
         new Chart(ctx, {
@@ -268,19 +368,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 labels: month_label,
                 datasets: [
                     {
-                        label: "민원구분1",
+                        label: "제증명 발급",
                         data: month_data_1,
                         borderColor: "#0088ca",
                         backgroundColor: "#0088ca",
                     },
                     {
-                        label: "민원구분2",
+                        label: "신분증 발급",
                         data: month_data_2,
                         borderColor: "#2e9545",
                         backgroundColor: "#2e9545",
                     },
                     {
-                        label: "민원구분3",
+                        label: "출생/사망/전입 신고",
                         data: month_data_3,
                         borderColor: "#bb1238",
                         backgroundColor: "#bb1238",
@@ -302,6 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                     },
                     y: {
+                        max: 100,
                         beginAtZero: true,
                         grid: {
                             borderDash: [6, 10000],
@@ -310,6 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         ticks: {
                             maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}건`,
                             font: {
                                 color: "#fff",
                             },
@@ -327,14 +429,297 @@ document.addEventListener("DOMContentLoaded", () => {
                             },
                         },
                     },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#0088ca",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0),
+                            },
+                            1: {
+                                type: "line",
+                                borderColor: "#2e9545",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 1),
+                            },
+                            2: {
+                                type: "line",
+                                borderColor: "#bb1238",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 2),
+                            },
+                        },
+                    },
                 },
             },
         });
+    };
+
+    const renderNumberTicketMonthTable = () => {
+        const month_table_head = document.querySelector(".mode#month table thead");
+        const month_table_body = document.querySelector(".mode#month table tbody");
+        const month_table_foot = document.querySelector(".mode#month table tfoot");
+
+        month_table_head.innerHTML =
+            `<tr>` +
+            (() => {
+                let htmlString = "<td>업무구분</td>";
+
+                month_label.forEach((label) => {
+                    htmlString += `<td>${label}</td>`;
+                });
+
+                return htmlString;
+            })() +
+            `<td>합계</td>` +
+            `<tr>`;
+
+        month_table_body.innerHTML = (() => {
+            let htmlString = "";
+
+            month_data.forEach((rows, idx) => {
+                htmlString += `<tr>`;
+
+                if (idx === 0) {
+                    htmlString += "<td>제증명 발급</td>"
+                } else if (idx === 1) {
+                    htmlString += "<td>신분증 발급</td>"
+                } else if (idx === 2) {
+                    htmlString += "<td>출생/사망/전입 신고</td>"
+                }
+
+                let amount = 0;
+
+                rows.forEach((row) => {
+                    htmlString += `<td>${row}</td>`;
+                    amount += row;
+                });
+
+
+                htmlString += `<td>${amount}</td>` +
+                `</tr>`;
+            });
+
+            return htmlString;
+        })();
+
+        month_table_foot.innerHTML = (() => {
+            let htmlString = "<td>합계</td>";
+            
+            for(var i = 2; i <= 33; i++) {
+                let amount = 0;
+                document.querySelectorAll(".mode#month table tbody tr").forEach(tr => {
+                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
+                })
+
+                htmlString += `<td>${amount}</td>`;
+            }
+
+            return htmlString;
+        })();
+    };
+
+    const day_label = [];
+    const day_data_1 = [];
+    const day_data_2 = [];
+    const day_data_3 = [];
+    const day_data = [day_data_1, day_data_2, day_data_3];
+
+    for (var i = 7; i <= 20; i++) {
+        day_label.push(`${i}시`);
+        day_data_1.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+        day_data_2.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
+        day_data_3.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0);
     }
 
+    const renderNumberTicketDayChart = () => {
+        const ctx = document.querySelector("#day #number_ticket_chart");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: day_label,
+                datasets: [
+                    {
+                        label: "제증명 발급",
+                        data: day_data_1,
+                        borderColor: "#0088ca",
+                        backgroundColor: "#0088ca",
+                    },
+                    {
+                        label: "신분증 발급",
+                        data: day_data_2,
+                        borderColor: "#2e9545",
+                        backgroundColor: "#2e9545",
+                    },
+                    {
+                        label: "출생/사망/전입 신고",
+                        data: day_data_3,
+                        borderColor: "#bb1238",
+                        backgroundColor: "#bb1238",
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                size: 12,
+                            },
+                        },
+                    },
+                    y: {
+                        max: 10,
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [6, 10000],
+                            tickLength: 6,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}건`,
+                            font: {
+                                color: "#fff",
+                            },
+                            padding: 5,
+                        },
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label;
+                                let value = context.parsed.y;
+                                return `${label}: ${(+value).toLocaleString("kr")}건`;
+                            },
+                        },
+                    },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#0088ca",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0),
+                            },
+                            1: {
+                                type: "line",
+                                borderColor: "#2e9545",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 1),
+                            },
+                            2: {
+                                type: "line",
+                                borderColor: "#bb1238",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 2),
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    };
+
+    const renderNumberTicketDayTable = () => {
+        const day_table_head = document.querySelector(".mode#day table thead");
+        const day_table_body = document.querySelector(".mode#day table tbody");
+        const day_table_foot = document.querySelector(".mode#day table tfoot");
+
+        day_table_head.innerHTML =
+            `<tr>` +
+            (() => {
+                let htmlString = "<td>업무구분</td>";
+
+                day_label.forEach((label) => {
+                    htmlString += `<td>${label}</td>`;
+                });
+
+                return htmlString;
+            })() +
+            `<td>합계</td>` +
+            `<tr>`;
+
+        day_table_body.innerHTML = (() => {
+            let htmlString = "";
+
+            day_data.forEach((rows, idx) => {
+                htmlString += `<tr>`;
+
+                if (idx === 0) {
+                    htmlString += "<td>제증명 발급</td>"
+                } else if (idx === 1) {
+                    htmlString += "<td>신분증 발급</td>"
+                } else if (idx === 2) {
+                    htmlString += "<td>출생/사망/전입 신고</td>"
+                }
+
+                let amount = 0;
+
+                rows.forEach((row) => {
+                    htmlString += `<td>${row}</td>`;
+                    amount += row;
+                });
+
+
+                htmlString += `<td>${amount}</td>` +
+                `</tr>`;
+            });
+
+            return htmlString;
+        })();
+
+        day_table_foot.innerHTML = (() => {
+            let htmlString = "<td>합계</td>";
+            
+            for(var i = 2; i <= 16; i++) {
+                let amount = 0;
+                document.querySelectorAll(".mode#day table tbody tr").forEach(tr => {
+                    amount += +(tr.querySelector(`td:nth-child(${i})`).innerHTML);
+                })
+
+                htmlString += `<td>${amount}</td>`;
+            }
+
+            return htmlString;
+        })();
+    };
+
+    
     const initNumberTicket = () => {
         renderNumberTicketYearChart();
+        renderNumberTicketYearTable();
         renderNumberTicketMonthChart();
+        renderNumberTicketMonthTable();
+        renderNumberTicketDayChart();
+        renderNumberTicketDayTable();
     };
 
     initNumberTicket();

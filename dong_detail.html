@@ -41,6 +41,7 @@
                     <div class="number-ticket-tab-box">
                         <button type="button" class="number-ticket-tab" data-value="year">연도별</button>
                         <button type="button" class="number-ticket-tab" data-value="month">월별</button>
+                        <button type="button" class="number-ticket-tab" data-value="day">일별</button>
                     </div>
                     
                 </div>
@@ -51,12 +52,45 @@
                             <canvas id="number_ticket_chart"></canvas>
                         </div>
                     </div>
+
+                    <div class="table-wrap dragscroll">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
                 </div>
+
                 <div class="mode" id="month">
                     <div class="chart-wrap dragscroll">
                         <div class="chart">
                             <canvas id="number_ticket_chart"></canvas>
                         </div>
+                    </div>
+
+                    <div class="table-wrap dragscroll">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mode" id="day">
+                    <div class="chart-wrap dragscroll">
+                        <div class="chart">
+                            <canvas id="number_ticket_chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap dragscroll">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -76,6 +110,8 @@
     <!-- Chart JS 3.9.1 / Chart JS DataLabels Plugin 2.0.0 -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.2/chartjs-plugin-annotation.min.js" integrity="sha512-6dmCqRV2/iXtbm8z/9+7bzLhOkmXvq9R6WoR+8QgrojgMU0/Nin+/eaWouEGEU5ishyKDYgRoiq7kURCVmwmqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Dragscroll -->
     <script src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
     <script src="./js/dong_detail.js" type="module"></script>
 </body>
