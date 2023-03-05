@@ -91,7 +91,13 @@ header {
     overflow: auto;
 }
 
-.tab-box {
+.gu-detail .tab-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+
+.dong-detail .tab-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
@@ -132,13 +138,15 @@ header {
 }
 
 .number-ticket-tab-box,
-.call-log-tab-box {
+.call-log-tab-box,
+.work-average-tab-box {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 .number-ticket-tab,
-.call-log-tab {
+.call-log-tab,
+.work-average-tab {
     color: #fff;
     background-color: transparent;
     padding: 5px 10px;
@@ -150,7 +158,8 @@ header {
     transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 .number-ticket-tab.active,
-.call-log-tab.active {
+.call-log-tab.active,
+.work-average-tab.active {
     opacity: 1;
     background-color: #0d1b2a;
 }
@@ -199,12 +208,18 @@ header {
     white-space: nowrap;
     table-layout: fixed;
 }
-.mode#year table {
+.dong-detail .mode#year table {
     max-width: 1200px;
     min-width: 800px;
 }
-.mode#month table {
+.gu-detail .mode#year table {
+    min-width: 1800px;
+}
+.dong-detail .mode#month table {
     min-width: 1400px;
+}
+.gu-detail .mode#month table {
+    min-width: 1800px;
 }
 .mode#day table {
     max-width: 1200px;
@@ -228,9 +243,9 @@ header {
     font-size: 0.9rem;
     font-weight: 700;
 }
-.mode table thead tr td:first-child,
-.mode table tbody tr td:first-child,
-.mode table tfoot tr td:first-child {
+.dong-detail .mode table thead tr td:first-child,
+.dong-detail .mode table tbody tr td:first-child,
+.dong-detail .mode table tfoot tr td:first-child {
     width: 150px;
 }
 .mode table thead tr td:not(:first-child),
@@ -243,12 +258,15 @@ header {
 .mode table tfoot tr td:nth-child(2n+2) {
     background-color: #415a7788;
 }
-.mode table thead tr td:last-child,
-.mode table tbody tr td:last-child,
-.mode table tfoot tr td:last-child {
+.dong-detail .mode table thead tr td:last-child,
+.dong-detail .mode table tbody tr td:last-child,
+.dong-detail .mode table tfoot tr td:last-child {
     border-left: 3px solid #1b263b;
 }
-.mode table tfoot tr {
+/* .mode table thead {
+    border-bottom: 3px solid #1b263b;
+} */
+.mode table tfoot {
     border-top: 3px solid #1b263b;
 }
 

@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTimeUpdate();
 
         SEOUL_GU.forEach((gu) => {
-            operate_status.innerHTML += `
+            operate_status.innerHTML +=
+                `
             <div class="gu swiper-slide" id="${gu}">
                 <div class='gu-title'>
                     <div class="gu-logo">
@@ -106,12 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         <li class='dong ${status_class === "error" ? "error" : ""}'>
                             <div>
                                 <span class='status ${status_class}'>
-                                ${ status_class === "error" ? "장애" : "" }
+                                ${status_class === "error" ? "장애" : ""}
                                 </span>
                             </div>
                             <div class='dong-name'>${dong}</div>
                             <div class='waiting'>
-                            ${ status_class === "error" ? "-" : waiting }
+                            ${status_class === "error" ? "-" : waiting}
                             </div>
                         </li>`;
                     });
@@ -173,15 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const all_dong = document.querySelectorAll(".dong-list .dong");
 
         all_dong.forEach((dong) => {
-            if(!dong.classList.contains("error")) {
+            if (!dong.classList.contains("error")) {
                 dong.addEventListener("click", (event) => {
                     const dong_name = event.currentTarget.querySelector(".dong-name").innerHTML;
                     const gu_name =
                         event.currentTarget.parentElement.parentElement.querySelector(
                             ".gu-title span"
                         ).innerHTML;
-                    console.log(gu_name);
-    
+
                     location.href = `./dong_detail.html?gu=${gu_name}&dong=${dong_name}`;
                 });
             }
@@ -189,4 +189,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     addDongClickEventListener();
+
+    const addGuClickEventListener = () => {
+        const all_gu = document.querySelectorAll(".gu .gu-title");
+
+        all_gu.forEach((gu) => {
+            gu.addEventListener("click", (event) => {
+                const gu_name = event.currentTarget.querySelector(".gu-logo span").innerHTML;
+
+                location.href = `./gu_detail.html?gu=${gu_name}`;
+            });
+        });
+    };
+
+    addGuClickEventListener();
 });

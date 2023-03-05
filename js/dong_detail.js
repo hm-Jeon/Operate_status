@@ -5,7 +5,6 @@ const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 const dong_name = urlParams.get("dong");
 const gu_name = urlParams.get("gu");
-const tab = urlParams.get("tab");
 
 // Chart Global Configuration
 Chart.defaults.responsive = true;

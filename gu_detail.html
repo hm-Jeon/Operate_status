@@ -22,34 +22,33 @@
             </a>
         </div>
         <div class="header-center">
-            <h1 class="title"><span class="dong-name"></span> 행정복지센터 운영현황</h1>
+            <h1 class="title"><span class="gu-name"></span> 행정복지센터 운영현황</h1>
         </div>
         <div class="header-right"></div>
     </header>
 
     
-    <div class="main dong-detail">
+    <div class="main gu-detail">
         <section class="app">
             <div class="tab-box">
-                <button type="button" class="tab" data-value="number_ticket">번호표 발급현황</button>
-                <button type="button" class="tab" data-value="call_log">민원인 호출기록</button>
+                <button type="button" class="tab" data-value="work_average">인원당 평균 민원 처리건수</button>
             </div>
 
-            <!-- 번호표 발급현황 -->
-            <div class="content" id="number_ticket">
+            <!-- 인원당 평균 민원 처리건수 -->
+            <div class="content" id="work_average">
 
                 <div class="search">
-                    <div class="number-ticket-tab-box">
-                        <button type="button" class="number-ticket-tab" data-value="year">연도별</button>
-                        <button type="button" class="number-ticket-tab" data-value="month">월별</button>
-                        <button type="button" class="number-ticket-tab" data-value="day">일별</button>
+                    <div class="work-average-tab-box">
+                        <button type="button" class="work-average-tab" data-value="year">연도별</button>
+                        <button type="button" class="work-average-tab" data-value="month">월별</button>
+                        <button type="button" class="work-average-tab" data-value="day">일별</button>
                     </div>
                 </div>
 
                 <div class="mode" id="year">
                     <div class="chart-wrap dragscroll">
                         <div class="chart">
-                            <canvas id="number_ticket_chart"></canvas>
+                            <canvas id="work_average_chart"></canvas>
                         </div>
                     </div>
 
@@ -65,7 +64,7 @@
                 <div class="mode" id="month">
                     <div class="chart-wrap dragscroll">
                         <div class="chart">
-                            <canvas id="number_ticket_chart"></canvas>
+                            <canvas id="work_average_chart"></canvas>
                         </div>
                     </div>
 
@@ -81,7 +80,7 @@
                 <div class="mode" id="day">
                     <div class="chart-wrap dragscroll">
                         <div class="chart">
-                            <canvas id="number_ticket_chart"></canvas>
+                            <canvas id="work_average_chart"></canvas>
                         </div>
                     </div>
 
@@ -91,47 +90,6 @@
                             <tbody></tbody>
                             <tfoot></tfoot>
                         </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 민원인 호출기록 -->
-            <div class="content" id="call_log">
-                <div class="search">
-                    <div class="call-log-tab-box">
-                        <button type="button" class="call-log-tab" data-value="amount">호출건수</button>
-                        <button type="button" class="call-log-tab" data-value="time">소요시간</button>
-                    </div>
-                </div>
-
-                <div class="mode" id="amount">
-                    <div class="chart-wrap dragscroll">
-                        <div class="chart">
-                            <canvas id="call_log_chart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="table-wrap dragscroll">
-                        <table>
-                            <thead></thead>
-                            <tbody></tbody>
-                            <tfoot></tfoot>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="mode" id="time">
-                    <div class="chart-wrap dragscroll">
-                        <div class="chart">
-                            <canvas id="call_log_chart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="time-log-wrap">
-                        <div class="swiper">
-                            <div class="swiper-wrapper"></div>
-                            <div class="swiper-scrollbar"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +103,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.2/chartjs-plugin-annotation.min.js" integrity="sha512-6dmCqRV2/iXtbm8z/9+7bzLhOkmXvq9R6WoR+8QgrojgMU0/Nin+/eaWouEGEU5ishyKDYgRoiq7kURCVmwmqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Dragscroll -->
     <script src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
-    <script src="./js/dong_detail.js" type="module"></script>
+    <script src="./js/gu_detail.js" type="module"></script>
 </body>
 </html>
