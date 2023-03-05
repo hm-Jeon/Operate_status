@@ -218,6 +218,9 @@ header {
 .dong-detail .mode#month table {
     min-width: 1400px;
 }
+.dong-detail .mode#month table thead tr td:not(:first-child) {
+    width: 50px;
+}
 .gu-detail .mode#month table {
     min-width: 1800px;
 }
@@ -240,6 +243,10 @@ header {
 .mode table tbody tr td,
 .mode table tfoot tr td {
     padding: 8px;
+}
+.gu-detail .mode table thead tr td,
+.gu-detail .mode table tbody tr td,
+.gu-detail .mode table tfoot tr td {
     overflow: hidden;
     text-overflow: ellipsis;
 }
