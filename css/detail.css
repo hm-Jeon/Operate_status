@@ -240,6 +240,8 @@ header {
 .mode table tbody tr td,
 .mode table tfoot tr td {
     padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .mode table tbody tr td:first-child,
 .mode table tfoot tr td:first-child {
