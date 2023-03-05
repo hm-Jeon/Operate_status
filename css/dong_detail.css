@@ -246,10 +246,10 @@ header {
 .mode table thead tr td:last-child,
 .mode table tbody tr td:last-child,
 .mode table tfoot tr td:last-child {
-    border-left: 2px solid #202d43 !important;
+    border-left: 3px solid #1b263b;
 }
 .mode table tfoot tr {
-    border-top: 2px solid #202d43 !important;
+    border-top: 3px solid #1b263b;
 }
 
 #time .time-log-wrap {
@@ -296,6 +296,23 @@ header {
 
 #time .time-log-wrap .swiper .swiper-wrapper .window .time-log {
     font-size: 0.8rem;
+    max-height: 400px;
+    overflow: auto;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log::-webkit-scrollbar {
+    width: 14px;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log::-webkit-scrollbar-track {
+    background-color: #00000022;
+    border-radius: 14px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+#time .time-log-wrap .swiper .swiper-wrapper .window .time-log::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
 }
 
 #time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log {

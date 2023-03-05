@@ -1,22 +1,5 @@
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js";
-
-const SEOUL_GU_LOGO = {
-    종로구: "jongno_logo",
-    중구: "jung_logo",
-    용산구: "yongsan_logo",
-    성동구: "seongdong_logo",
-    광진구: "gwangjin_logo",
-    동대문구: "dongdaemun_logo",
-    중랑구: "jungrang_logo",
-    성북구: "seongbuk_logo",
-    강북구: "gangbuk_logo",
-    도봉구: "dobong_logo",
-    노원구: "nowon_logo",
-    은평구: "eunpyeong_logo",
-    서대문구: "seodaemun_logo",
-    마포구: "mapo_logo",
-    양천구: "yangcheon_logo",
-};
+import {SEOUL_GU_LOGO} from "./config.js";
 
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -795,7 +778,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     {
                         label: "제증명 발급",
                         data: amount_data_1,
-                        borderColor: "#0088ca",
                         backgroundColor: "#0088ca",
                         borderRadius: 10,
                         barPercentage: 0.5,
@@ -803,7 +785,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     {
                         label: "신분증 발급",
                         data: amount_data_2,
-                        borderColor: "#2e9545",
                         backgroundColor: "#2e9545",
                         borderRadius: 10,
                         barPercentage: 0.5,
@@ -811,7 +792,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     {
                         label: "출생/사망/전입 신고",
                         data: amount_data_3,
-                        borderColor: "#bb1238",
                         backgroundColor: "#bb1238",
                         borderRadius: 10,
                         barPercentage: 0.5,
@@ -1006,8 +986,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     {
                         label: "평균 소요시간",
                         data: time_average,
-                        borderColor: "#0088ca",
-                        backgroundColor: "#0088ca",
+                        backgroundColor: (ctx) => {
+                            const average = Math.round(time_average.reduce((prev, current) => prev + current) / time_average.length);
+                            const data = ctx.parsed.y;
+
+                            if (Math.abs(average - data) <= 5) {
+                                return "#2e9545";
+                            }
+                            else if (average < data) {
+                                return "#bb1238";
+                            } else {
+                                return "#0088ca";
+                            }
+                        },
                         borderRadius: 10,
                         barPercentage: 0.5,
                     },
