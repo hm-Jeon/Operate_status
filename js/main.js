@@ -1,5 +1,5 @@
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js";
-import {SEOUL_GU, SEOUL_GU_LOGO, SEOUL_DONG} from "./config.js";
+import { SEOUL_GU, SEOUL_GU_LOGO, SEOUL_DONG } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const time_now = document.querySelector("#time_now");
@@ -43,19 +43,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     startTimeNow();
 
+    const renderGuWaitingSum = () => {
+        const all_gu = document.querySelectorAll(".gu");
+
+        all_gu.forEach((gu) => {
+            const all_waiting = gu.querySelectorAll(".dong:not(.error) .waiting");
+            const gu_waiting_sum = document.querySelector(`.gu#${gu.id} .gu-waiting-sum .value`);
+            let waiting_sum = 0;
+
+            all_waiting.forEach((waiting) => {
+                waiting_sum += +waiting.innerHTML;
+            });
+
+            gu_waiting_sum.innerHTML = waiting_sum;
+        });
+    };
+
     const renderOperateStatus = () => {
         renderTimeUpdate();
 
         SEOUL_GU.forEach((gu) => {
-            operate_status.innerHTML +=
-                "<div class='gu swiper-slide'>" +
-                `<div class='gu-title'><img class='gu-logo' src='./images/${SEOUL_GU_LOGO[gu]}.svg' alt='${gu}'><span>${gu}</span></div>` +
-                "<div class='list-header'>" +
-                "<div class='status'>상태</div>" +
-                "<div class='welfare-center'>행정복지센터</div>" +
-                "<div class='waiting'>대기인원</div>" +
-                "</div>" +
-                "<ul class='dong-list'>" +
+            operate_status.innerHTML += `
+            <div class="gu swiper-slide" id="${gu}">
+                <div class='gu-title'>
+                    <div class="gu-logo">
+                        <img src='./images/${SEOUL_GU_LOGO[gu]}.svg' alt='${gu}'>
+                        <span>${gu}</span>
+                    </div>
+                    <div class="gu-waiting-sum">
+                        <span>총 대기인원</span>
+                        <span class="value"></span>
+                    </div>
+                </div>
+
+                <div class='list-header'>
+                    <div class='status'>상태</div>
+                    <div class='welfare-center'>행정복지센터</div>
+                    <div class='waiting'>대기인원</div>
+                </div>
+
+                <ul class='dong-list'>` +
                 (() => {
                     let htmlString = "";
 
@@ -71,23 +98,31 @@ document.addEventListener("DOMContentLoaded", () => {
                             status_class = "smooth";
                         }
 
-                        if(dong === "장충동") {
+                        if (dong === "장충동") {
                             status_class = "error";
                         }
 
-                        htmlString +=
-                            `<li class='dong ${status_class === "error" ? "error" : ""}'>` +
-                            `<div><span class='status ${status_class}'>${status_class === "error" ? "장애" : ""}</span></div>` +
-                            `<div class='dong-name'>${dong}</div>` +
-                            `<div class='waiting'>${status_class === "error" ? "-" : waiting}</div>` +
-                            "</li>";
+                        htmlString += `
+                        <li class='dong ${status_class === "error" ? "error" : ""}'>
+                            <div>
+                                <span class='status ${status_class}'>
+                                ${ status_class === "error" ? "장애" : "" }
+                                </span>
+                            </div>
+                            <div class='dong-name'>${dong}</div>
+                            <div class='waiting'>
+                            ${ status_class === "error" ? "-" : waiting }
+                            </div>
+                        </li>`;
                     });
 
                     return htmlString;
                 })() +
-                "</ul>" +
-                "</div>";
+                `</ul>
+            </div>`;
         });
+
+        renderGuWaitingSum();
     };
 
     const swiper = new Swiper(".swiper", {
@@ -108,9 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dong.querySelector(".dong-name").innerHTML !== "장충동") {
                 const status = dong.querySelector(".status");
                 const waiting = dong.querySelector(".waiting");
-    
+
                 const newWaiting = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
-    
+
                 status.classList.remove("busy", "normal", "smooth");
                 let status_class = "";
                 if (newWaiting >= 10) {
@@ -120,11 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     status_class = "smooth";
                 }
-    
+
                 status.classList.add(status_class);
                 waiting.innerHTML = newWaiting;
             }
         });
+
+        renderGuWaitingSum();
     };
 
     renderOperateStatus();
@@ -136,13 +173,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const all_dong = document.querySelectorAll(".dong-list .dong");
 
         all_dong.forEach((dong) => {
-            dong.addEventListener("click", (event) => {
-                const dong_name = event.currentTarget.querySelector(".dong-name").innerHTML;
-                const gu_name = event.currentTarget.parentElement.parentElement.querySelector(".gu-title span").innerHTML;
-                console.log(gu_name);
-
-                location.href = `./dong_detail.html?gu=${gu_name}&dong=${dong_name}`;
-            });
+            if(!dong.classList.contains("error")) {
+                dong.addEventListener("click", (event) => {
+                    const dong_name = event.currentTarget.querySelector(".dong-name").innerHTML;
+                    const gu_name =
+                        event.currentTarget.parentElement.parentElement.querySelector(
+                            ".gu-title span"
+                        ).innerHTML;
+                    console.log(gu_name);
+    
+                    location.href = `./dong_detail.html?gu=${gu_name}&dong=${dong_name}`;
+                });
+            }
         });
     };
 

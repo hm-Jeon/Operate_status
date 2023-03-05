@@ -744,19 +744,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addCallLogTabClickEventListener();
 
+    const window_cnt = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
     const amount_label = [];
     const amount_data_1 = [];
     const amount_data_2 = [];
     const amount_data_3 = [];
     const amount_data = [amount_data_1, amount_data_2, amount_data_3];
 
-    for (var i = 1; i <= 8; i++) {
+    for (var i = 1; i <= window_cnt; i++) {
         amount_label.push(`${i}번 창구`);
         if (i === 2 || i === 5) {
             amount_data_1.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
             amount_data_2.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
             amount_data_3.push(Math.floor(Math.random() * (10 - 5 + 1)) + 5);
-        } else if (i === 4 || i === 8) {
+        } else if (i === 4 || i === window_cnt) {
             amount_data_1.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
             amount_data_2.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
             amount_data_3.push(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
@@ -908,7 +909,7 @@ document.addEventListener("DOMContentLoaded", () => {
         amount_table_foot.innerHTML = (() => {
             let htmlString = "<td>합계</td>";
 
-            for (var i = 2; i <= 10; i++) {
+            for (var i = 2; i <= window_cnt + 2; i++) {
                 let amount = 0;
                 document.querySelectorAll(".mode#amount table tbody tr").forEach((tr) => {
                     amount += +tr.querySelector(`td:nth-child(${i})`).innerHTML;
@@ -925,7 +926,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const time_log_data = [];
     const time_average = [];
 
-    for (var i = 1; i <= 8; i++) {
+    for (var i = 1; i <= window_cnt; i++) {
         time_label.push(`${i}번 창구`);
     }
 

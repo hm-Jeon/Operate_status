@@ -107,6 +107,7 @@ header {
     padding: 10px 0;
     text-align: end;
     font-size: 0.8rem;
+    font-weight: 700;
 }
 
 .operate-status {
@@ -130,13 +131,9 @@ header {
     overflow: hidden;
 }
 
-.operate-status .swiper .swiper-wrapper .gu .gu-logo {
-    height: 1.2rem;
-    filter: brightness(0) invert(1);
-}
-
 .operate-status .swiper .swiper-wrapper .gu .gu-title {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     font-size: 1.2rem;
@@ -145,6 +142,25 @@ header {
 }
 .operate-status .swiper .swiper-wrapper .gu .gu-title:hover {
     opacity: 0.5;
+}
+
+.operate-status .swiper .swiper-wrapper .gu .gu-title .gu-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.operate-status .swiper .swiper-wrapper .gu .gu-title .gu-logo img {
+    height: 1.2rem;
+    filter: brightness(0) invert(1);
+}
+
+.operate-status .swiper .swiper-wrapper .gu .gu-title .gu-waiting-sum {
+    display: flex;
+    gap: 5px;
+    font-size: 0.8rem;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #142133;
 }
 
 .operate-status .swiper .swiper-wrapper .gu .list-header {
@@ -244,7 +260,16 @@ header {
         height: 1rem;
     }
     .operate-status .swiper .swiper-wrapper .gu .gu-title {
+        flex-direction: column;
         font-size: 1rem;
+    }
+
+    .operate-status .swiper .swiper-wrapper .gu .gu-title .gu-logo {
+        align-self: flex-start;
+    }
+
+    .operate-status .swiper .swiper-wrapper .gu .gu-title .gu-waiting-sum {
+        align-self: flex-end;
     }
 
     .operate-status .swiper .swiper-wrapper .gu .dong-list {
