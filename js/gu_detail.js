@@ -138,7 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
     SEOUL_DONG[gu_name].forEach((dong, dong_idx) => {
         const dong_data = [];
         const worker = Math.floor(Math.random() * (10 - 6 + 1)) + 6;
-        let year_work_average = 0;
+        let year_work_sum = 0;
+        let month_work_average_sum = 0;
 
         for (var i = 0; i < 12; i++) {
             let work;
@@ -152,15 +153,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 work = Math.floor(Math.random() * (2300 - 1800 + 1)) + 1800;
             }
 
+            year_work_sum += work
+
             const average = +(work / worker).toFixed(1);
-            year_work_average += average;
+            month_work_average_sum += average;
 
             dong_data.push({ worker, work, average });
         }
 
         work_average_data[dong] = {
             dong_data,
-            year_average: +(year_work_average / 12).toFixed(1),
+            month_average: +(month_work_average_sum / 12).toFixed(1),
+            year_average: +(year_work_sum / worker).toFixed(1),
+        };
+    });
+
+    const work_average_day_data = {};
+
+    SEOUL_DONG[gu_name].forEach((dong, dong_idx) => {
+        const dong_data = [];
+        const worker = work_average_data[dong].dong_data[0].worker;
+        let day_work_average = 0;
+
+        for (var i = 0; i < 31; i++) {
+            let work;
+
+            if (dong_idx === 2) {
+                work = Math.floor(Math.random() * (120 - 90 + 1)) + 90;
+            }
+            if (dong_idx === 4) {
+                work = Math.floor(Math.random() * (90 - 60 + 1)) + 60;
+            } else {
+                work = Math.floor(Math.random() * (100 - 80 + 1)) + 80;
+            }
+
+            const average = +(work / worker).toFixed(1);
+            day_work_average += average;
+
+            dong_data.push({ worker, work, average });
+        }
+
+        work_average_day_data[dong] = {
+            dong_data,
+            day_average: +(day_work_average / 31).toFixed(1),
         };
     });
 
@@ -188,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             );
                             const data = ctx.parsed.y;
 
-                            if (Math.abs(average - data) <= 20) {
+                            if (Math.abs(average - data) <= 200) {
                                 return "#2e9545";
                             } else if (average < data) {
                                 return "#bb1238";
@@ -216,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                     },
                     y: {
-                        max: 400,
+                        // max: 400,
                         // beginAtZero: true,
                         grid: {
                             borderDash: [6, 10000],
@@ -302,7 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let htmlString = "<tr><td>인원수</td>";
 
             for (const dong in work_average_data) {
-                htmlString += `<td>${work_average_data[dong].dong_data[0].worker}</td>`
+                htmlString += `<td>${work_average_data[dong].dong_data[0].worker}</td>`;
             }
 
             htmlString += "</tr><tr><td>평균</td>";
@@ -312,20 +347,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 htmlString += `<td>${average}</td>`;
             }
 
-
-            htmlString += "</tr>"
+            htmlString += "</tr>";
 
             return htmlString;
         })();
     };
 
-    const month_average = [];
-    for (const dong in work_average_data) {
-        month_average.push(work_average_data[dong].dong_data[0].average);
-    }
-
     const renderWorkAverageMonthChart = () => {
         const ctx = document.querySelector("#month #work_average_chart");
+
+        const month_average = [];
+
+        for (const dong in work_average_data) {
+            month_average.push(work_average_data[dong].month_average);
+        }
 
         new Chart(ctx, {
             type: "bar",
@@ -370,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                     },
                     y: {
-                        max: 400,
+                        max: 500,
                         // beginAtZero: true,
                         grid: {
                             borderDash: [6, 10000],
@@ -423,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
         month_table_head.innerHTML =
             `<tr>` +
             (() => {
-                let htmlString = "<td>행정복지센터</td>";
+                let htmlString = "<td></td>";
 
                 for (const dong in work_average_data) {
                     htmlString += `<td>${dong}</td>`;
@@ -436,18 +471,18 @@ document.addEventListener("DOMContentLoaded", () => {
         month_table_body.innerHTML = (() => {
             let htmlString = "";
 
-            htmlString += `
-            <tr>
-                <td>인원당 평균</td>
-            `;
+            for (var month = 0; month < 12; month++) {
+                htmlString += `<tr>`;
+                htmlString += `<td>${month + 1}월</td>`;
+                let amount = 0;
 
+                for (const dong in work_average_data) {
+                    const average = work_average_data[dong].dong_data[month].average;
+                    htmlString += `<td>${average}</td>`;
+                }
 
-            for (const dong in work_average_data) {
-                const average = work_average_data[dong].dong_data[0].average;
-                htmlString += `<td>${average}</td>`;
+                htmlString += `</tr>`;
             }
-
-            htmlString += `</tr>`;
 
             return htmlString;
         })();
@@ -456,21 +491,183 @@ document.addEventListener("DOMContentLoaded", () => {
             let htmlString = "<tr><td>인원수</td>";
 
             for (const dong in work_average_data) {
-                htmlString += `<td>${work_average_data[dong].dong_data[0].worker}</td>`
+                htmlString += `<td>${work_average_data[dong].dong_data[0].worker}</td>`;
             }
 
-            htmlString += "</tr>"
+            htmlString += "</tr><tr><td>평균</td>";
+
+            for (const dong in work_average_data) {
+                const average = work_average_data[dong].month_average;
+                htmlString += `<td>${average}</td>`;
+            }
+
+            htmlString += "</tr>";
+
+            return htmlString;
+        })();
+    };
+
+    const renderWorkAverageDayChart = () => {
+        const ctx = document.querySelector("#day #work_average_chart");
+
+        const day_average = [];
+
+        for (const dong in work_average_day_data) {
+            day_average.push(work_average_day_data[dong].day_average);
+        }
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: Object.keys(work_average_day_data),
+                datasets: [
+                    {
+                        label: "인원당 평균 민원 처리건수",
+                        data: day_average,
+                        backgroundColor: (ctx) => {
+                            const average = Math.round(
+                                day_average.reduce((prev, current) => prev + current) /
+                                    day_average.length
+                            );
+                            const data = ctx.parsed.y;
+
+                            if (Math.abs(average - data) <= 1) {
+                                return "#2e9545";
+                            } else if (average < data) {
+                                return "#bb1238";
+                            } else {
+                                return "#0088ca";
+                            }
+                        },
+                        borderRadius: 5,
+                        barPercentage: 0.5,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                size: 12,
+                            },
+                        },
+                    },
+                    y: {
+                        max: 20,
+                        // beginAtZero: true,
+                        grid: {
+                            borderDash: [6, 10000],
+                            tickLength: 6,
+                            color: "#fff",
+                        },
+                        ticks: {
+                            maxTicksLimit: 6,
+                            callback: (value) => `${value.toLocaleString("kr")}건`,
+                            font: {
+                                color: "#fff",
+                            },
+                            padding: 5,
+                        },
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label;
+                                let value = context.parsed.y;
+                                return `${label}: ${(+value).toLocaleString("kr")}건`;
+                            },
+                        },
+                    },
+                    annotation: {
+                        annotations: {
+                            0: {
+                                type: "line",
+                                borderColor: "#fff",
+                                borderDash: [10, 10],
+                                borderDashOffset: 0,
+                                borderWidth: 3,
+                                scaleID: "y",
+                                value: (ctx) => average(ctx, 0),
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    };
+
+    const renderWorkAverageDayTable = () => {
+        const day_table_head = document.querySelector(".mode#day table thead");
+        const day_table_body = document.querySelector(".mode#day table tbody");
+        const day_table_foot = document.querySelector(".mode#day table tfoot");
+
+        day_table_head.innerHTML =
+            `<tr>` +
+            (() => {
+                let htmlString = "<td></td>";
+
+                for (const dong in work_average_day_data) {
+                    htmlString += `<td>${dong}</td>`;
+                }
+
+                return htmlString;
+            })() +
+            `<tr>`;
+
+        day_table_body.innerHTML = (() => {
+            let htmlString = "";
+
+            for (var day = 0; day < 31; day++) {
+                htmlString += `<tr>`;
+                htmlString += `<td>${day + 1}일</td>`;
+                let amount = 0;
+
+                for (const dong in work_average_day_data) {
+                    const average = work_average_day_data[dong].dong_data[day].average;
+                    htmlString += `<td>${average}</td>`;
+                }
+
+                htmlString += `</tr>`;
+            }
+
+            return htmlString;
+        })();
+
+        day_table_foot.innerHTML = (() => {
+            let htmlString = "<tr><td>인원수</td>";
+
+            for (const dong in work_average_day_data) {
+                htmlString += `<td>${work_average_day_data[dong].dong_data[0].worker}</td>`;
+            }
+
+            htmlString += "</tr><tr><td>평균</td>";
+
+            for (const dong in work_average_day_data) {
+                const average = work_average_day_data[dong].day_average;
+                htmlString += `<td>${average}</td>`;
+            }
+
+            htmlString += "</tr>";
 
             return htmlString;
         })();
     };
 
     const initWorkAverage = () => {
-        console.log(work_average_data);
         renderWorkAverageYearChart();
         renderWorkAverageYearTable();
         renderWorkAverageMonthChart();
         renderWorkAverageMonthTable();
+        renderWorkAverageDayChart();
+        renderWorkAverageDayTable();
     };
 
     initWorkAverage();

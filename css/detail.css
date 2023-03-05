@@ -221,9 +221,12 @@ header {
 .gu-detail .mode#month table {
     min-width: 1800px;
 }
-.mode#day table {
+.dong-detail .mode#day table {
     max-width: 1200px;
     min-width: 800px;
+}
+.gu-detail .mode#day table {
+    min-width: 1600px;
 }
 .mode#amount table {
     max-width: 1200px;
