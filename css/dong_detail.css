@@ -367,6 +367,36 @@ header {
     .app {
         padding: 10px;
     }
+
+    .mode table thead {
+        font-size: 0.8rem;
+    }
+    .mode table thead tr td,
+    .mode table tbody tr td,
+    .mode table tfoot tr td {
+        padding: 6px;
+    }
+    .mode table tbody tr td:first-child,
+    .mode table tfoot tr td:first-child {
+        font-size: 0.8rem;
+    }
+
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log-title {
+        font-size: 1rem;
+    }
+    
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:first-child,
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:first-child {
+        width: 100px;
+    }
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:nth-child(2),
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:nth-child(2) {
+        width: 100px;
+    }
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log-header > div:nth-child(3),
+    #time .time-log-wrap .swiper .swiper-wrapper .window .time-log .log > div:nth-child(3) {
+        width: 60px;
+    }
 }
 
 @media screen and (max-width: 450px) {
