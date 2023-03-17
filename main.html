@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+        <title>서울시 행정복지센터 운영 현황</title>
+    </head>
+    <body>
+        <header>
+            <div class="header-left">
+                <a class="logo" href="./main.html">
+                    <img class="logo-img" src="./images/seoul_logo.svg" alt="서울특별시" />
+                    <span class="logo-text">서울특별시</span>
+                </a>
+            </div>
+            <div class="header-center">
+                <h1 class="title">서울특별시 행정복지센터 운영현황</h1>
+                <div class="time">
+                    <span id="time_now">현재시간</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-list">
+                    <span class="status smooth">원활</span>
+                    <span class="status normal">보통</span>
+                    <span class="status busy">혼잡</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main">
+            <div class="time">
+                <span id="time_update"></span> 기준
+            </div>
+            <section class="operate-status">
+                <div class="swiper">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </section>
+        </div>
+
+        <script src="./js/main.js" type="module"></script>
+    </body>
+</html>
